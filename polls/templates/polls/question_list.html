@@ -1,0 +1,18 @@
+<!-- This is a template used (by default) by the generic.ListView
+     for model=Question.
+    Inside the view you can access the model objects as a variable
+    named object_list or question_list (this is a named derived from
+    the model class.  In the QuestionListView(generic.ListView) class
+    we have 'model=Question' so the list object injected into this
+    template is named question_list. 
+-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for q in question_list %}
+{{q.id}}:  "{{q.question_text}}" <br/>
+{% endfor %}
+
+{% endblock %}

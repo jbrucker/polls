@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script>
+window.onload = function () {
+	
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	axisX:{
+		interval: 1
+	},
+	axisY2:{
+		interlacedColor: "rgba(1,77,101,.2)",
+		gridColor: "rgba(1,77,101,.1)",
+		title: "Votes"
+	},
+	data: [{
+		type: "bar",
+		name: "votes",
+		axisYType: "secondary",
+		color: "#014D65",
+		dataPoints: [
+            {% for c in question.choice_set.all|dictsort:"votes" %}
+			    { y: {{c.votes}}, label: "{{c.choice_text}}" } {% if not forloop.last %},{% endif %}
+            {% endfor %}
+		]
+	}]
+});
+chart.render();
+}
+</script>
+
+<h2>"{{question.question_text}}"</h2>
+{% load static %}
+<div id="chartContainer" style="height: 370px; width: 90%;"></div>
+<!-- script src="https://canvasjs.com/assets/script/canvasjs.min.js" -->
+
+<script src="{% static 'canvasjs.min.js' %}">
+</script>
+<br/>
+
+<p>
+<table border="0" align="left" style="padding:4ex;">
+<tr>
+    <th>Choice</th> <th>Votes</th>
+</tr>
+{% for choice in question.choice_set.all|dictsort:"choice_text" %}
+<tr valign="top">
+    <td>{{choice.choice_text}}</td> <td align="center">{{choice.votes}}</td>
+</tr>
+{% endfor %}
+</table>
+</p>
+{% endblock %}

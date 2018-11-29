@@ -1,0 +1,24 @@
+configure.txt
+venv/
+env/
+.env
+.env.*
+local_settings.py
+*.env
+__pycache__/
+*.py[cod]
+/build
+db.sqlite3
+
+# code coverage
+.coverage
+htmlcov/
+/coverage
+
+# logs, etc
+*.log
+
+# Pydev (Eclipse) and VSCode
+.project
+.pydevproject
+.vscode/

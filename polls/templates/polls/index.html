@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>SKE Programming Polls</h1>
+{% if question_list %}
+<table style="th,td: {padding: 8px;}">
+    <thead>
+        <tr>
+            <th>Poll</th><th>Started</th><th>&nbsp</th><th>&nbsp;</th>
+        </tr>
+    </thead>
+    {% for question in question_list %}
+    <tr>
+        <td>{{question.question_text}} </td>
+        <td>{{question.pub_date | date:"DATE_FORMAT"}}</td>
+        <td><a href="{% url 'polls:detail' question.id %}">Vote</a></td>
+        <td><a href="{% url 'polls:results' question.id %}">View Result</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>No poll questions available</p>
+{% endif %}
+
+{% endblock %}

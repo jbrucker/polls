@@ -1,0 +1,23 @@
+{% block content %}
+
+{% if form.errors %}
+<p>Username or password not recognized. Please try again.</p>
+{% endif %}
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account does not have access to that page.<br/>
+    Please login with a different account.
+    </p>
+  {% else %}
+  <p>Please login to submit a vote.</p>
+  {% endif %}
+{% endif %}
+<h2>Login</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Login</button>
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+{% endblock %}
